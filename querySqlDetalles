@@ -2,7 +2,6 @@ select
   row_number() OVER (order by NUM_COM_AP) as IDD,
   NUM_COM_AP,
   TIP_COM_AP + REPLACE(STR(C_EMISOR,3),' ', '0') + REPLACE(STR(NUM_COM_AP,8),' ', '0') + replace(convert(NVARCHAR, FECHA_FACT, 103), '/', '') as FK_ERP_CRE_MIG,
-  --CUOTAS - row_number() OVER (order by NUM_COM_AP desc) AS CUOTALC,
   CUOTAS as CUOTA,
   (select count(*) from _ERP_CRE_PER_LC 
    where tip_com_ap = cp.tip_com_ap
