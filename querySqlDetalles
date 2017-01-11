@@ -15,6 +15,6 @@ select
      and num_com_ap = cp.num_com_ap
      and FECHA_FACT = cp.FECHA_FACT and FECHA_VENC > cp.FECHA_VENC
    ) as CUOTA,
-  FECHA_VENC as VTO,
+  convert(varchar(20), FECHA_VENC, 103) as VTO,
   SALDO as IMP_CUOTA
 from _ERP_CRE_PER_LC CP
