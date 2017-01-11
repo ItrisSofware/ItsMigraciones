@@ -1,4 +1,5 @@
-USE MOBILAR_DESA
+USE BASE_DE_DATOS
+
 --Declaro las variables y su tipado.
 declare @FK_ERP_SUCURSALES varchar(10)
 declare @FK_ERP_TALONARIOS varchar(10)
@@ -51,7 +52,7 @@ replace(CAST (TIP_COM_AP as NVARCHAR (3))+ '' + CONVERT(VARCHAR(10),REPLACE(STR(
 @FK_ERP_SUCURSALES as FK_ERP_SUCURSALES,
 @FK_ERP_TALONARIOS as FK_ERP_TALONARIOS,
 FK_ERP_CUE_CREDITOS = '',--Falta la generación dinámica.
-DATEADD(day, -0, MIN(FECHA_FACT)) as FEC_EMI,
+convert(varchar(20), DATEADD(day, -0, MIN(FECHA_FACT)), 103) as FEC_EMI,
 @FK_ERP_PLA_FIN as FK_ERP_PLA_FIN,
 replace(ID_CLIENTE,' ', '') as FK_ERP_EMPRESAS,
 @TAS_NET_IMP as TAS_NET_IMP,
