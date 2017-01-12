@@ -1,5 +1,4 @@
-USE BASE_DE_DATOS
-
+USE MOBILAR_DESA
 --Declaro las variables y su tipado.
 declare @FK_ERP_SUCURSALES varchar(10)
 declare @FK_ERP_TALONARIOS varchar(10)
@@ -26,12 +25,12 @@ declare @C_EMISOR varchar(3)
 --Seteo los valores para cada variable.
 set @FK_ERP_SUCURSALES = '1'
 set @FK_ERP_TALONARIOS = '6015'
-set @FK_ERP_PLA_FIN = '24'
+set @FK_ERP_PLA_FIN = '15'
 set @TAS_NET_IMP = '0.00'
 set @PUN_CUO_ATR = '0.00'
 set @GTO_ADM_INI = '0.00'
 set @OBS_CRE  = ''
-set @EST_EXP_SUC  = 'P'
+set @EST_EXP_SUC  = 0
 set @GENERA  = '1'
 set @FK_ERP_CREDITOS = ''
 set @OBS_IMP = ''
@@ -56,7 +55,7 @@ convert(varchar(20), DATEADD(day, -0, MIN(FECHA_FACT)), 103) as FEC_EMI,
 @FK_ERP_PLA_FIN as FK_ERP_PLA_FIN,
 replace(ID_CLIENTE,' ', '') as FK_ERP_EMPRESAS,
 @TAS_NET_IMP as TAS_NET_IMP,
-(case when (SUM(SALDO) / COUNT(NUM_COM_AP) = MIN(SALDO)) then null else MIN(SALDO) end) as IMP_CUO_ANT,
+(case when (SUM(SALDO) / COUNT(NUM_COM_AP) = MIN(SALDO)) then 0 else MIN(SALDO) end) as IMP_CUO_ANT,
 @PUN_CUO_ATR as PUN_CUO_ATR,
 @GTO_ADM_INI as GTO_ADM_INI,
 @OBS_CRE as OBS_CRE,
@@ -75,5 +74,6 @@ replace(ID_CLIENTE,' ', '') as FK_ERP_EMPRESAS,
 @FK_ERP_CAT_IVA as FK_ERP_CAT_IVA,
 @FK_ERP_T_COM_VEN + + CONVERT(VARCHAR(10),REPLACE(STR(C_EMISOR,3),' ', '0')) + REPLACE(STR(NUM_COM_AP,8),' ', '0') AS FK_ERP_COM_VEN
 from _ERP_CRE_PER_LC
+where NUM_COM_AP = '100024' or NUM_COM_AP = '4111'
 group by NUM_COM_AP, TIP_COM_AP, ID_CLIENTE, C_EMISOR
 order by NUM_COM_AP
