@@ -1,0 +1,35 @@
+USE MOBILAR
+select 
+TIPO,
+VENTA,
+COMPRA,
+HABILITADO,
+FK_ERP_ALI_IVA,
+ANTICIPO,
+ES_COMBO,
+GARANTIA,
+UNI_PRE_VEN,
+PLA_GAR,
+TOL_GAR,
+PLA_DEV_GAR,
+ES_GAR,
+EQUIVALENCIA
+from ERP_ARTICULOS
+where 
+VENTA = 1 
+and ANTICIPO = 0 
+and ES_COMBO = 0
+and DESCRIPCION like ('%garant%exte%') 
+and TIPO = 'S' 
+and HABILITADO = 1 
+and VENTA = 1 
+and COMPRA = 1
+
+---Normalizo la migración de artículos sobre los que son de garantía.
+--UPDATE ERP_ARTICULOS SET TIPO='S' where DESCRIPCION like ('%garant%exte%') and TIPO = 'P'
+
+---Soluciona posible errores de migración que contengan datos nullos.
+--UPDATE ERP_ARTICULOS SET ANTICIPO = 0, ES_COMBO = 0, EQUIVALENCIA='1.00', UNI_PRE_VEN='S' where DESCRIPCION like ('%garant%exte%') and TIPO = 'S'
+
+---Verifico si la alícuota asociada a los artículos que son garantía extendida corresponde al 21%
+--SELECT DESCRIPCION FROM ERP_ALICUOTAS where ID = '7'
