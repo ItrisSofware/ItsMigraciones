@@ -1,0 +1,9 @@
+select 
+ID,
+NUM_DOC, 
+substring(NUM_DOC, 1,2) + '-' + substring(NUM_DOC, 3,8) + '-' + substring(NUM_DOC, 11,1) as CUITNORMALIZADO, 
+ORIGEN, 
+PROVEEDOR,
+'UPDATE ERP_EMPRESAS SET NUM_DOC = ''' + substring(NUM_DOC, 1,2) + '-' + substring(NUM_DOC, 3,8) + '-' + substring(NUM_DOC, 11,11) + ''' WHERE ID = ''' + ID  + '''' as QUERY
+from ERP_EMPRESAS
+where PROVEEDOR = 1 and NUM_DOC <> '0' and LEN(NUM_DOC)= 11
