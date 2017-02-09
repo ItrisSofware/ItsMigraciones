@@ -1,0 +1,22 @@
+select
+row_number() OVER (order by ID) as IDD,
+FECH_APLIC as FECHA,
+case when SALDO > 0 then 'CI' else 'DI' end as FK_ERP_T_COM_COM,
+'A0000' + REPLACE(STR(NUM_COM_AP,8),' ', '0') as NUM_COM,
+'PRO-' + CO_CTA_CTE as FK_ERP_EMPRESAS,
+VENCIM as FEC_VEN,
+FK_ERP_ARTICULOS = '03121980',
+CANTIDAD = '1.00',
+FK_ERP_MON_PRE = '1',
+SALDO as PRE_LIS,
+SALDO as IMP_TOT_LIS,
+OBSERVACIONES = '',
+GENERADO = '0',
+ESTADO = 'H',
+FK_ERP_DEPOSITOS = '1',
+FK_ERP_TIP_ASI = '4',
+FK_ERP_CON_COM = '2',
+COTIZACION = 1.0000
+from _SALDOS_INI_COMPRAS
+where NUM_COM_AP <> 0
+order by NUM_COM_AP asc
