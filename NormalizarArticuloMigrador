@@ -1,0 +1,6 @@
+select 
+UNI_PRE_VEN, 
+EQUIVALENCIA, 
+'UPDATE ERP_ARTICULOS SET UNI_PRE_VEN = ''S'', EQUIVALENCIA= ''1.00'' where ID = ''' + ID + ''''
+from ERP_ARTICULOS
+where UNI_PRE_VEN is null or EQUIVALENCIA is null
